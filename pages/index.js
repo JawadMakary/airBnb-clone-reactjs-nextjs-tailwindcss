@@ -5,6 +5,7 @@ import SmallCard from '../components/SmallCard'
 import Header from '../components/Header'
 import MediumCard from '../components/MediumCard'
 import LargeCard from '../components/LargeCard'
+import Footer from '../components/Footer'
 
 export default function Home({exploreData,cardsData}) {
   // npm i tailwind-scrollbar-hide->plugin to hide scrollbar
@@ -79,6 +80,7 @@ export default function Home({exploreData,cardsData}) {
 
             />
       </main>
+      <Footer />
     </div>
   )
 }
