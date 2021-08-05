@@ -3,9 +3,14 @@ import Banner from '../components/Banner'
 import SmallCard from '../components/SmallCard'
 
 import Header from '../components/Header'
+import MediumCard from '../components/MediumCard'
 
-export default function Home({exploreData}) {
-  
+export default function Home({exploreData,cardsData}) {
+  // npm i tailwind-scrollbar-hide->plugin to hide scrollbar
+  //to use it we need to add it in tailwind.config.js
+  // plugins: [
+  //  require('tailwind-scrollbar-hide')
+ // ],
 //npx create-next-app -e with-tailwindcss my-project to create it
 
   //npm run dev and then copy the localhost link and paste it in the browser
@@ -49,6 +54,22 @@ export default function Home({exploreData}) {
           {/* faster load and better UX */}
 
           </section>
+          <section>
+          <h2 className="text-4xl font-semibold py-8">Live Anywhere</h2>
+          <div className="flex space-x-3 overflow-scroll scrollbar-hide
+          p-3 -ml-3
+          ">
+{/* overflow-scroll to add scrollable aspect */}
+          
+          {cardsData?.map(({img,title})=>(
+          <MediumCard
+          key={img}
+          img={img}
+          title={title}
+          />
+          ))}
+          </div>
+          </section>
       </main>
     </div>
   )
@@ -60,10 +81,14 @@ export async function getStaticProps(){
 const exploreData=await fetch('https://links.papareact.com/pyp')
 .then((res)=>res.json()
 )
+const cardsData=await fetch('https://links.papareact.com/zp1')
+.then((result)=>result.json()
+)
 // we need to return it to the ftc component
 return {
   props:{
-    exploreData:exploreData
+   exploreData,cardsData
+
   }
 }
 
