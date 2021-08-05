@@ -4,6 +4,7 @@ import SmallCard from '../components/SmallCard'
 
 import Header from '../components/Header'
 import MediumCard from '../components/MediumCard'
+import LargeCard from '../components/LargeCard'
 
 export default function Home({exploreData,cardsData}) {
   // npm i tailwind-scrollbar-hide->plugin to hide scrollbar
@@ -70,6 +71,13 @@ export default function Home({exploreData,cardsData}) {
           ))}
           </div>
           </section>
+          <LargeCard
+          img='https://links.papareact.com/4cj'
+            title='The Greatest Outdoors'
+            description="Whishlists curated by Airbnb"
+            buttonText="Get Inspired"
+
+            />
       </main>
     </div>
   )
