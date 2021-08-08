@@ -5,8 +5,11 @@ import { DateRangePicker } from 'react-date-range';
 import {useState} from 'react'
 import Image from 'next/image'
 import {SearchIcon,GlobeAltIcon,MenuIcon,UserCircleIcon,UsersIcon} from '@heroicons/react/solid'
-function Header() {
+import { useRouter } from 'next/dist/client/router';
+function Header({placeholder}) {
     const [searchInput,setSearchInput]=useState('')
+    // useRouter-> same as reactJs router
+    const router=useRouter()
     // configuration for date range
     const[startDate,setStartDate]=useState(new Date())
     const[endDate,setEndDate]=useState(new Date())
@@ -22,6 +25,18 @@ function Header() {
 
     }
     const[nbOfGuests,setNbOfGuests]=useState(1)
+    const search=()=>{
+        router.push({
+            pathname:'/search',
+            //data shared to search page
+            query:{
+                location:searchInput,
+                startDate:startDate.toISOString(),
+                endDate:endDate.toISOString(),
+                nbOfGuests:nbOfGuests
+            }
+        })
+    }
 
     return (
         // on 768px => md:px-10
@@ -32,7 +47,7 @@ function Header() {
 
             
             {/* left */}
-           <div className="relative flex items-center h-10 cursor-pointer my-auto">
+           <div onClick={()=>router.push("/")} className="relative flex items-center h-10 cursor-pointer my-auto">
                 {/* nextJs img tage -> optimize img -> webk-> way smaller */}
                 {/* we need to pass layout props to Image cmp */}
                 {/* we need to list img that are allowed to be used in a file named nextconfigjs */}
@@ -46,7 +61,7 @@ function Header() {
            </div>
            {/* middle */}
            <div className="flex  items-center md:border-2 rounded-full py-2 md:shadow-sm ">
-           <input type="text" placeholder="Start your search" className="outline-none pl-5 bg-transparent flex-grow text-sm text-gray-600 placeholder-gray-400" 
+           <input type="text" placeholder={ placeholder || "Start your search"} className="outline-none pl-5 bg-transparent flex-grow text-sm text-gray-600 placeholder-gray-400" 
            value={searchInput}
            onChange={(e)=>setSearchInput(e.target.value)}
            />
@@ -87,7 +102,8 @@ function Header() {
                 </div>
                 <div className="flex">
                     <button className="flex-grow text-gray-500" onClick={()=>setSearchInput("")}>Cancel</button>
-                    <button className="flex-grow text-red-400">Search</button>
+                    <button 
+                    onClick={search}className="flex-grow text-red-400">Search</button>
                 </div>
             </div>
             
