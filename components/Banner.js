@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Typewriter from "typewriter-effect";
 
 function Banner() {
     return (
@@ -14,7 +15,23 @@ function Banner() {
         />
         {/* tailwind delete all previous styling for h1, h2 , btn etc */}
         <div className="absolute top-1/2 w-full text-center ">
-            <p className="text-sm sm:text-lg">Not sure where to go? Perfect.</p>
+       
+            <p className="text-sm sm:text-lg">
+            <Typewriter
+  
+  onInit={(typewriter)=> {
+
+  typewriter
+   
+  .typeString("Not sure where to go?")
+    
+  .pauseFor(100)
+  .deleteAll()
+  .typeString("Perfect. ")
+  .start();
+  }}
+  />
+</p>
             <button className="text-purple-500 bg-white px-10 py-4 shadow-md rounded-full font-bold my-3
             transition duration-150
             hover:shadow-xl active:scale-90">I'm flexible</button>
